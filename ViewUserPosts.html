@@ -1,0 +1,35 @@
+﻿<html>
+	<head>
+		<meta charset="utf-8"/>
+		<title> View User Posts Frontend </title>
+	</head>
+
+	<body>
+        <p>Select a username to view their posts:</p><br>
+		<form action="ViewUserPosts.php" method="post">
+			
+			<div class="form-group">
+                <select class="form-control" name="username">
+        <?php $mysqli = new mysqli("mysql.eecs.ku.edu", "m323m313", "ahj9Eey7", "m323m313");
+				if ($mysqli->connect_errno) {
+				    printf("Connect failed: %s\n", $mysqli->connect_error);
+				    exit();
+				}
+				else{
+					$query = "SELECT user_id FROM Users";
+		        $result = $mysqli -> query($query);
+					while ($row = $result->fetch_assoc()) {
+						echo "<option value=$row[user_id]>";
+						echo $row['user_id'];
+						echo "</option>";
+					}
+					
+				}
+				?>
+                    </select>
+		</div>
+			<input type="submit" id="submit" value="Submit">
+		</form>
+	</body>
+
+</html>
